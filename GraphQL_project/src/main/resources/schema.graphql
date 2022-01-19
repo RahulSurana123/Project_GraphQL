@@ -1,0 +1,26 @@
+schema{
+	query: Query
+}
+
+type Query{
+	allMovie: [Movie]!	
+}
+
+type Movie{
+	name: String!
+	imdb_rating: Int
+	director: Name
+}
+
+Type Name{
+	prefix: Prefix
+	firstName: String
+	lastName: String
+}
+
+enum Prefix{
+	Mr
+	Dr
+	Ms
+	Mrs
+}
