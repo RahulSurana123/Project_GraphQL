@@ -12,7 +12,8 @@ type Movie{
 	director: Name
 }
 
-Type Name{
+type Name{
+	id: Int
 	prefix: Prefix
 	firstName: String
 	lastName: String

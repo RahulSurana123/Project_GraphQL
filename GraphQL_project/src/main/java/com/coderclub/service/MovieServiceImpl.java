@@ -9,7 +9,6 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
 import com.coderclub.model.Movie;
@@ -24,7 +23,6 @@ import graphql.schema.idl.RuntimeWiring;
 import graphql.schema.idl.SchemaGenerator;
 import graphql.schema.idl.SchemaParser;
 import graphql.schema.idl.TypeDefinitionRegistry;
-import graphql.schema.idl.TypeRuntimeWiring;
 
 @Service
 public class MovieServiceImpl {
@@ -32,7 +30,7 @@ public class MovieServiceImpl {
 	@Autowired
 	MovieRepository movieRepository;
 	
-	@Value("classpath:schema.graphql")
+	@Value("classpath:/graphql/schema.graphqls")
 	Resource resource;
 
 	@Autowired
@@ -43,7 +41,7 @@ public class MovieServiceImpl {
 	@PostConstruct
 	private void loadSchema() throws IOException {
 		LoadData();
-
+		System.out.println(resource.getURI());
 		File schemaFile = resource.getFile();
 		TypeDefinitionRegistry typeDefinitionRegistry = new SchemaParser()
 				.parse(schemaFile);
@@ -65,4 +63,9 @@ public class MovieServiceImpl {
 				new Movie("Kuch Kuch Hota he",4,new Name(Prefix.Mr,"Karan","Johar"))
 				).forEach( movie -> movieRepository.save(movie));
 	}
+	
+	public GraphQL getGraphQL() {
+		return graphQL;
+	}
+	
 }
