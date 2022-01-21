@@ -1,8 +1,10 @@
 # Project_GraphQL
-
+...
 Making a small test GraphQL project to understand it properly
+
 ---
-<i>## Things Covered in the project:</i>
+
+## *Things Covered in the project:*
 
 - How graphqls file is made
 - Concept of <b>datafetchers</b> and how they act as a middle party between query and data returned
