@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.coderclub.service.MovieServiceImpl;
@@ -20,7 +21,8 @@ public class MovieResource {
 	MovieServiceImpl movieServiceImpl;
 	
 	@PostMapping
-    public ResponseEntity<Object> getAllBooks(@RequestBody String query) {
+    public ResponseEntity<Object> getAllMovies(@RequestBody String query) {
+		
         ExecutionResult execute = movieServiceImpl.getGraphQL().execute(query);
 
         return new ResponseEntity<>(execute, HttpStatus.OK);

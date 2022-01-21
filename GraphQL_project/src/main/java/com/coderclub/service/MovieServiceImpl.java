@@ -16,6 +16,7 @@ import com.coderclub.model.Name;
 import com.coderclub.model.Prefix;
 import com.coderclub.repository.MovieRepository;
 import com.coderclub.service.datafetcher.AllMovieDataFetcher;
+import com.coderclub.service.datafetcher.GetMovieDataFetcher;
 
 import graphql.GraphQL;
 import graphql.schema.GraphQLSchema;
@@ -36,12 +37,14 @@ public class MovieServiceImpl {
 	@Autowired
 	private AllMovieDataFetcher allMovieDataFetcher;
 	
+	@Autowired
+	private GetMovieDataFetcher getMovieDataFetcher;
+	
 	private GraphQL graphQL;
 
 	@PostConstruct
 	private void loadSchema() throws IOException {
 		LoadData();
-		System.out.println(resource.getURI());
 		File schemaFile = resource.getFile();
 		TypeDefinitionRegistry typeDefinitionRegistry = new SchemaParser()
 				.parse(schemaFile);
@@ -54,13 +57,18 @@ public class MovieServiceImpl {
 	private RuntimeWiring buildRuntimeWiring() {
 
 		return RuntimeWiring.newRuntimeWiring()
-				.type("Query", typeWiring -> typeWiring.dataFetcher("allMovie", allMovieDataFetcher))
+				.type("Query",
+						typeWiring -> typeWiring
+								.dataFetcher("allMovie", allMovieDataFetcher)
+								.dataFetcher("getMovie", getMovieDataFetcher))
 				.build();
 	}
 
 	private void LoadData() {
 		Stream.of(
-				new Movie("Kuch Kuch Hota he",4,new Name(Prefix.Mr,"Karan","Johar"))
+				new Movie("Kuch Kuch Hota he",4,new Name(Prefix.Mr,"Karan","Johar")),
+				new Movie("3 Idiot",5,new Name(Prefix.Mr,"Amir","Khan")),
+				new Movie("kabhi alwida na kehna",5,new Name(Prefix.Mr,"Sarukh","Khan"))
 				).forEach( movie -> movieRepository.save(movie));
 	}
 	

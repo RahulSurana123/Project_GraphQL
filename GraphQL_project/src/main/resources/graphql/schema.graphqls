@@ -3,7 +3,8 @@ schema{
 }
 
 type Query{
-	allMovie: [Movie]!	
+	allMovie(filter: String,sort: String): [Movie]!	
+	getMovie(id: String): Movie
 }
 
 type Movie{
