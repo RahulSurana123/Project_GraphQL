@@ -1,0 +1,40 @@
+{
+	"info": {
+		"_postman_id": "5e3b59eb-46b2-4379-b1a1-e1ac322ff0d4",
+		"name": "Graph QL Query",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6266424"
+	},
+	"item": [
+		{
+			"name": "graphql",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    allMovie{\r\n        name\r\n        imdb_rating\r\n    }\r\n    getMovie(id: \"3 Idiot\"){\r\n        name\r\n        imdb_rating\r\n    }\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/movie",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movie"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
